@@ -93,6 +93,310 @@ ul {
   cursor: pointer;
 }
 
+/* бекдроп */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.2);
+  opacity: 1;
+
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  /* вариант для центрирования модального окна номер 2 :
+  display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.backdrop.is-hidden .modal {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* выпадающее модальное окно */
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 0 40px;
+
+  min-width: 528px;
+  min-height: 581px;
+
+  background-color: #fff;
+
+  transform: translate(-50%, -50%) scale(1);
+
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* тайтл */
+.modal__heading {
+  margin-top: 40px;
+  margin-bottom: 30px;
+
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 1.15;
+  text-align: center;
+  letter-spacing: 0.03em;
+}
+
+/* элементы списка с полями контактной информации */
+.form-list-label {
+  position: relative;
+  color: var(--primaty-text-color);
+}
+
+.form-list-item {
+  margin-bottom: 28px;
+}
+
+/* поле для комментария */
+.textarea {
+  margin-bottom: 20px;
+  resize: none;
+  width: 448px;
+
+  border: 1px solid rgba(33, 33, 33, 0.2);
+  box-sizing: border-box;
+  border-radius: 4px;
+  outline: none;
+}
+
+.form-list-item__input {
+  width: 448px;
+  height: 40px;
+  border: 1px solid rgba(33, 33, 33, 0.2);
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding-left: 42px;
+  outline: none;
+
+  transition: border 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-list-item__input:focus,
+.textarea:focus {
+  border: 1px solid var(--accent-color);
+}
+
+.form-list-item__input:focus + .form-list-label {
+  border-color: var(--accent-color);
+  border-radius: 4px;
+}
+.form-list-item__input:focus + .label-name,
+textarea:focus + .label-name {
+  transform: translate(-30px, -30px);
+
+  font-size: 12px;
+  line-height: 1.17;
+  letter-spacing: 0.01em;
+  color: var(--accent-color);
+}
+
+textarea:focus + .label-name {
+  transform: translate(-5px, -30px);
+}
+
+.form-list-item__input:not(:placeholder-shown) + .label-name,
+textarea:not(:placeholder-shown) + .label-name {
+  transform: translate(-30px, -30px);
+
+  font-size: 12px;
+  line-height: 1.17;
+  letter-spacing: 0.01em;
+  color: var(--accent-color);
+}
+
+textarea:not(:placeholder-shown) + .label-name {
+  transform: translate(-5px, -30px);
+}
+
+/* Текст лейба */
+.label-name {
+  position: absolute;
+  left: 42px;
+  top: 2px;
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  color: var(--second-text-color);
+  letter-spacing: 0.01em;
+  font-size: 14px;
+  line-height: 1.14;
+}
+
+/* иконки в лейбл */
+.icon {
+  display: inline-block;
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  left: 19px;
+  top: 50%;
+  transform: translate(0, -50%);
+
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  transition: background-image 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.person-icon {
+  background-image: url(../images/person.svg);
+}
+
+.phone-icon {
+  background-image: url(../images/phone.svg);
+}
+
+.mail-icon {
+  background: url(../images/mail.svg);
+  width: 15px;
+}
+
+.form-list-item__input:focus ~ .person-icon {
+  background-image: url(../images/person-focused.svg);
+}
+
+.form-list-item__input:focus ~ .phone-icon {
+  background-image: url(../images/phone-focused.svg);
+}
+
+.form-list-item__input:focus ~ .mail-icon {
+  background: url(../images/mail-focused.svg);
+  width: 15px;
+}
+
+/* ЧЕКБОКС */
+.agreement-text__checkbox {
+  position: absolute;
+  width: 1;
+  height: 1;
+  margin: -1;
+  clip: rect(0 0 0 0);
+  border: 0;
+  overflow: hidden;
+}
+
+.textarea-label-name {
+  left: 16px;
+  top: 12px;
+}
+
+.agreement-text {
+  display: inline-flex;
+  align-items: center;
+  color: var(--second-text-color);
+  font-size: 14px;
+  line-height: 1.71;
+}
+
+.agreement-text__icon {
+  display: inline-block;
+  width: 16px;
+  height: 15px;
+  background-image: url(../images/off.svg);
+  margin-right: 8px;
+  transition: background-image 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.agreement-text__checkbox:focus + .agreement-text__icon {
+  background-image: unset;
+  border: 2px solid var(--accent-color);
+  border-radius: 2px;
+}
+
+.agreement-text__checkbox:checked + .agreement-text__icon {
+  background-color: var(--accent-color);
+  border-radius: 2px;
+  background-image: url(../images/on.svg);
+  background-size: contain;
+  background-origin: border-box;
+}
+
+.form-list-textarea {
+  position: relative;
+}
+
+/* ссылка на договор */
+.contract-link {
+  text-decoration: none;
+  color: var(--accent-color);
+}
+
+.contract-link:hover,
+.contract-link:focus {
+  text-decoration: underline;
+}
+
+/* кнопка отправки формы */
+.form-submit-btn {
+  display: block;
+  padding: 10px 55px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  margin-bottom: 40px;
+
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 30px;
+
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.06em;
+
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  border-width: 0px;
+  cursor: pointer;
+}
+
+.form-submit-btn:hover,
+.form-submit-btn:focus {
+  border-color: var(--white);
+  background: var(--background-primaty-color);
+  color: var(--accent-color);
+  cursor: pointer;
+}
+
+/* кнопка закрытия модалки */
+.close-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(10px, -10px);
+
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.2), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 1px 3px rgba(0, 0, 0, 0.12);
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.close-btn:hover {
+  cursor: pointer;
+}
+.close-btn:active {
+  outline: none;
+  background-color: var(--accent-color);
+}
+
+.close-btn-icon {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+
 /* H2 */
 .section-heading {
   margin-bottom: 50px;

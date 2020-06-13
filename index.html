@@ -61,7 +61,11 @@
             Эффективные решения <br />
             для вашего бизнеса
           </h1>
-          <button class="hero-button">Заказать услугу</button>
+          <button class="hero-button" data-open-modal>
+            Заказать услугу
+          </button>
+
+          
         </div>
       </section>
       <!-- About us-->
@@ -448,12 +452,17 @@
 
           <div class="footer-boxes-item">
             <b class="footer-action-request">Подпишитесь на рассылку</b>
-            <button class="footer-button">
-              <span class="footer-btn-text">Подписаться</span>
-              <svg class="subscribe-icon">
-                <use href="./images/symbol-defs.svg#icon-logo-send"></use>
-              </svg>
-            </button>
+            <div class="subscribe-form">
+              <label  class="subscribe-form__label">
+                <input type="email" name="email"  class="subscribe-form__input" placeholder="E-mail">
+              </label>
+              <button class="footer-button">
+                <span class="footer-btn-text">Подписаться</span>
+                <svg class="subscribe-icon">
+                  <use href="./images/symbol-defs.svg#icon-logo-send"></use>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
         <p class="copyright copyright-box">
@@ -461,5 +470,99 @@
         </p>
       </div>
     </footer>
+
+    <!-- Модальное окно "Заказать услугу" -->
+    <div class="backdrop is-hidden" data-backdrop>
+      <div class="modal">
+        <form action="" class="js-speaker-form">
+          <h2 class="modal__heading">
+            Оставьте свои данные, мы вам перезвоним
+          </h2>
+    
+          <div role="contact-inforamtion">
+            <ul>
+              <li class="form-list-item">
+                <label class="form-list-label">
+                  <input type="name" name="name" class="form-list-item__input user-name" placeholder=" " />
+                  <span class="label-name">Имя</span>
+                  <span class="icon person-icon"></span>
+                </label>
+              </li>
+              <li class="form-list-item">
+                <label class="form-list-label">
+                  <input type="tel" name="phone" class="form-list-item__input phone" placeholder=" " />
+                  <span class="label-name">Телефон</span>
+                  <span class="icon phone-icon"></span>
+                </label>
+              </li>
+              <li class="form-list-item">
+                <label class="form-list-label">
+                  <input type="email" name="email" class="form-list-item__input email" placeholder=" " />
+                  <span class="label-name">Почта</span>
+                  <span class="icon mail-icon"></span>
+                </label>
+              </li>
+              <li class="form-list-textarea">
+                <label class="form-list-label"></label>
+                <textarea name="comment" class="textarea" rows="10" placeholder=" "></textarea>
+                <span class="label-name textarea-label-name">Комментарий</span>
+                </label>
+              </li>
+            </ul>
+          </div>
+    
+          <label class="agreement-text">
+            <input type="checkbox" name="agreement" class="agreement-text__checkbox" />
+            <span class="agreement-text__icon"></span>Соглашаюсь с рассылкой и принимаю
+            <a href="" class="contract-link"> Условия договора</a>
+    
+          </label>
+    
+          <button type="submit" class="button form-submit-btn">
+            Отправить
+          </button>
+        </form>
+        <button data-close-modal class="close-btn">
+          <svg class="close-btn-icon">
+            <use href="./images/symbol-defs.svg#icon-close"></use>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <script>
+      // скрипт для добавления класса модальному окну
+      const refs = {
+        openModalBtn: document.querySelector('[data-open-modal]'),
+        closeModalBtn: document.querySelector('[data-close-modal]'),
+        backdrop: document.querySelector('[data-backdrop]'),
+      };
+
+      refs.openModalBtn.addEventListener('click', toggleModal);
+      refs.closeModalBtn.addEventListener('click', toggleModal);
+
+      refs.backdrop.addEventListener('click', logBackdropClick);
+
+      function toggleModal() {
+        refs.backdrop.classList.toggle('is-hidden');
+      }
+
+      function logBackdropClick() {
+        console.log('Это клик в бекдроп');
+      }
+      // скрипт для отправки данных через форму в нашу консоль
+           (() => {
+              document
+                .querySelector('.js-speaker-form')
+                .addEventListener('submit', e => {
+                  e.preventDefault();
+
+                  new FormData(e.currentTarget).forEach((value, name) =>
+                    console.log(`${name}: ${value}`),
+                  );
+
+                  e.currentTarget.reset();
+                });
+            })();
+    </script>
   </body>
 </html>
