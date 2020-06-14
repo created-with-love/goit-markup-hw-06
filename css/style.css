@@ -286,7 +286,7 @@ textarea:not(:placeholder-shown) + .label-name {
 
 .textarea-label-name {
   left: 16px;
-  top: 12px;
+  top: -177px;
 }
 
 .agreement-text {
