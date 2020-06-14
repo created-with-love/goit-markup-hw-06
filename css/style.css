@@ -387,8 +387,13 @@ textarea:not(:placeholder-shown) + .label-name {
   cursor: pointer;
 }
 .close-btn:active {
-  outline: none;
   background-color: var(--accent-color);
+}
+
+.close-btn:active,
+.close-btn:enabled {
+  outline: none;
+  border: none;
 }
 
 .close-btn-icon {
